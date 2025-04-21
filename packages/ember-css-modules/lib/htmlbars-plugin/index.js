@@ -62,7 +62,7 @@ module.exports = class ClassTransformPlugin {
   }
 
   transformStatement(node) {
-    if (node.path.original === 'local-class') {
+    if (getValue(node.path) === 'local-class') {
       this.transformLocalClassHelperInvocation(node);
     } else {
       this.transformPossibleComponentInvocation(node);
@@ -70,7 +70,7 @@ module.exports = class ClassTransformPlugin {
   }
 
   transformSubexpression(node) {
-    if (node.path.original === 'local-class') {
+    if (getValue(node.path) === 'local-class') {
       this.transformLocalClassHelperInvocation(node);
     }
   }
@@ -246,3 +246,17 @@ module.exports = class ClassTransformPlugin {
     return parts;
   }
 };
+
+function getValue(path) {
+  if (!path) return;
+
+  if ('value' in path) {
+    return path.value;
+  }
+
+  /**
+   * Deprecated in ember 5.9+
+   * (so we use the above for newer embers)
+   */
+  return path.original;
+}

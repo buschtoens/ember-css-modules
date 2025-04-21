@@ -21,7 +21,7 @@ function updateStringValue(node, updater) {
     node.chars = updater(node.chars);
   } else if (node.type === 'StringLiteral') {
     node.value = updater(node.value);
-    node.original = updater(node.original);
+    getValue(node) = updater(getValue(node));
   } else {
     throw new Error('Unknown node type ' + node.type + ' (not a string?)');
   }
@@ -74,6 +74,20 @@ function pushAll(target, arr) {
   }
 
   return target;
+}
+
+function getValue(path) {
+  if (!path) return;
+
+  if ('value' in path) {
+    return path.value;
+  }
+
+  /**
+   * Deprecated in ember 5.9+
+   * (so we use the above for newer embers)
+   */
+  return path.original;
 }
 
 module.exports = {
