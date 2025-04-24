@@ -80,34 +80,6 @@ function pushAll(target, arr) {
   return target;
 }
 
-function getValue(path) {
-  if (!path) return;
-
-  if ('value' in path) {
-    return path.value;
-  }
-
-  /**
-   * Deprecated in ember 5.9+
-   * (so we use the above for newer embers)
-   */
-  return path.original;
-}
-
-function setValue(node, value) {
-  if (!node) return;
-
-  if ('value' in node) {
-    node.value = value;
-  } else {
-    /**
-     * Deprecated in ember 5.9+
-     * (so we use the above for newer embers)
-     */
-    node.original = value;
-  }
-}
-
 module.exports = {
   pushAll: pushAll,
   getPair: getPair,
