@@ -100,7 +100,7 @@ function setValue(node, value) {
      * Deprecated in ember 5.9+
      * (so we use the above for newer embers)
      */
-    path.original = value;
+    node.original = value;
   }
 }
 
