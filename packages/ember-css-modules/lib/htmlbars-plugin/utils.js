@@ -21,7 +21,11 @@ function updateStringValue(node, updater) {
     node.chars = updater(node.chars);
   } else if (node.type === 'StringLiteral') {
     node.value = updater(node.value);
-    setValue(node, updater(getValue(node)));
+    // Avoid `original` deprecation in Ember 5.9+
+    let originalDesc = Object.getOwnPropertyDescriptor(node, 'original');
+    if (originalDesc && originalDesc.value) {
+      node.original = updater(node.original);
+    }
   } else {
     throw new Error('Unknown node type ' + node.type + ' (not a string?)');
   }
