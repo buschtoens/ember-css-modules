@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/).
 
 ## Unreleased
 
+## 2.1.1 (April 4, 2019)
+### Fixed
+- Remove usage of .original in Ember 5.9+ to fix deprecation warnings.
+
 ## 2.1.0 (April 2, 2024)
 
 ### Added
